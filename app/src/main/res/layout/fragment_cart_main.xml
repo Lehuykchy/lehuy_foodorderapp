@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layoutmain">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:id="@+id/tongthanhtoan"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:text="Tổng thanh toán: "
+            android:textSize="20dp"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/tvfoodcart_sum"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:text="0 đ"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/cam"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/tongthanhtoan"/>
+        <TextView
+            android:id="@+id/tv_buyfoodcart"
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:text="Mua hàng"
+            android:layout_alignParentRight="true"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:background="@color/maucam"
+            android:textColor="#EEFFFFFF"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
