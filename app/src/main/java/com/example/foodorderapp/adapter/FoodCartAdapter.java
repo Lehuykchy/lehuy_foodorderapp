@@ -23,6 +23,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderapp.R;
+import com.example.foodorderapp.model.BillFood;
 import com.example.foodorderapp.model.Cart;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -85,6 +86,8 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
             @Override
             public void onClick(View v) {
                 edtFoodAmount.setText(String.valueOf(Integer.parseInt(edtFoodAmount.getText().toString()) + 1));
+                cart.setAmount(Integer.parseInt(edtFoodAmount.getText().toString()) + 1);
+                notifyDataSetChanged();
             }
         });
 
@@ -104,13 +107,13 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
                             tvFoodPriceSum.setText(Html.fromHtml
                                     ("<i>"+(String.valueOf
                                             (value * Integer.parseInt(cart.getFood().getPrice())) + " đ")+"</i>"));
-                            mView.invalidate();
+//                            mView.invalidate();
                         }else{
-                            mView.invalidate();
+//                            mView.invalidate();
                         }
                         iClickItem.updateAmountFood(cart, Integer.parseInt(String.valueOf(edtFoodAmount.getText())), cart.getId());
                     } catch (NumberFormatException e) {
-                        mView.invalidate();
+//                        mView.invalidate();
                     }
                 }
             }
@@ -133,13 +136,14 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
         holder.tvDeleteFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iClickItem.clickDeleteFoodCart(cart, cart.getId());
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage("Bạn có chắc chắn muốn xóa địa chỉ này không ?")
                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 listCart.remove(cart);
+                                iClickItem.clickDeleteFoodCart(cart, cart.getId());
                                 notifyDataSetChanged();
                                 Toast.makeText(context, "Xóa địa chỉ thành công!", Toast.LENGTH_SHORT).show();
 
@@ -215,5 +219,8 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
             linearLayout = itemView.findViewById(R.id.item_foodcart);
 
         }
+    }
+    public void setDataList(List<Cart> newDataList) {
+        this.listCart = newDataList;
     }
 }

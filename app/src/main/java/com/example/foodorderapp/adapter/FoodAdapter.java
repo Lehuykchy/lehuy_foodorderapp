@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderapp.R;
+import com.example.foodorderapp.model.BillFood;
 import com.example.foodorderapp.model.Food;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -117,5 +118,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     private List<Food> GetListFood() {
         return this.listFood;
+    }
+
+    public void setDataList(List<Food> newDataList) {
+        this.listFood = newDataList;
     }
 }

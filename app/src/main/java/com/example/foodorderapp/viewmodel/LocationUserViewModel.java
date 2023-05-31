@@ -17,5 +17,8 @@ public class LocationUserViewModel extends ViewModel {
     public void deleteLocation(Location location, String documentSnapshot){
         locationUserRepo.deleteLocation(location, documentSnapshot);
     }
+    public void updateLocation(String location, String documentSnapshot){
+        locationUserRepo.updateLocation(location, documentSnapshot);
+    }
 
 }

@@ -16,12 +16,13 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 public class FirebaseLocationUserRepo implements LocationUserRepo{
     private static final String CUSTOMER_COLLECTION = "customers";
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private FirebaseUser currentUser = auth.getCurrentUser();
+    private String uid = currentUser.getUid();
 
     @Override
     public void addLocation(Location location) {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
-        String uid = currentUser.getUid();
+
 
         DocumentReference locationRef = database.collection(CUSTOMER_COLLECTION).document(uid);
         Task<DocumentReference> collectionReference = locationRef.collection("locations").add(location)
@@ -40,9 +41,6 @@ public class FirebaseLocationUserRepo implements LocationUserRepo{
 
     @Override
     public void deleteLocation(Location location, String documentSnapshot) {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
-        String uid = currentUser.getUid();
 
         DocumentReference locationRef = database.collection(CUSTOMER_COLLECTION).document(uid);
         Task<Void> collectionReference = locationRef.collection("locations").document(String.valueOf(documentSnapshot)).delete()
@@ -57,6 +55,23 @@ public class FirebaseLocationUserRepo implements LocationUserRepo{
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w("delete", "Error deleting document", e);
+                    }
+                });
+    }
+
+    @Override
+    public void updateLocation(String location, String documentSnapshot) {
+        DocumentReference cardRef = database.collection(CUSTOMER_COLLECTION).document(uid);
+        cardRef
+                .update("location", location)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
                     }
                 });
     }

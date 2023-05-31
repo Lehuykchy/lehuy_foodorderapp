@@ -12,16 +12,28 @@ public class Customer {
     private String date;
 
 
-    public Customer(String id, String name, String numberphone, String date, String email, String gender) {
+
+    private String location;
+
+
+    public Customer(String id, String name, String numberphone, String date, String email, String gender, String location) {
         this.id = id;
         this.name = name;
         this.numberphone = numberphone;
         this.email = email;
         this.gender = gender;
         this.date = date;
+        this.location = location;
     }
 
     public Customer() {
+    }
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getId() {

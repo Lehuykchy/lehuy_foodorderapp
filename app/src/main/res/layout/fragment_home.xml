@@ -16,12 +16,14 @@
             android:padding="10dp"
             android:background="@color/white">
             <ImageView
+                android:id="@+id/img_searchhome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_search_24"
                 android:layout_gravity="center"/>
 
             <EditText
+                android:id="@+id/edt_homesearchfood"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginLeft="10dp"

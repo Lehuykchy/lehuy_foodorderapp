@@ -52,11 +52,11 @@ public class FragmentFavorite extends Fragment {
         return mView;
     }
 
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        navController = Navigation.findNavController(view);
-//
-//    }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
+
+    }
 
     private void initUI() {
         recyclerView = mView.findViewById(R.id.rcv_foodfavorite);
@@ -72,14 +72,19 @@ public class FragmentFavorite extends Fragment {
             public void onClickItemFoodFavorite(int position) {
                 Food foodSelected = foodFavoriteAdapter.GetFoodByPosition(position);
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("favorite", foodSelected.getFavorite());
                 bundle.putString("idfood", foodSelected.getId());
                 bundle.putString("mamefood", foodSelected.getName());
                 bundle.putString("idphotofood", foodSelected.getIdPhoto());
                 bundle.putString("pricefood", foodSelected.getPrice());
                 bundle.putString("infofood", foodSelected.getInfomationFood());
                 bundle.putString("idrestaurant", foodSelected.getIdRestaurant());
-//                navController.navigate(R.id.action_fragmentFavorite_to_fragmentFoodView2, bundle);
+                bundle.putString("locationrestaurant", foodSelected.getLocationRestaurant());
+                bundle.putString("namerestaurant", foodSelected.getNameRestaurant());
+                bundle.putString("typefood", foodSelected.getTypeFood());
+                bundle.putInt("amount", foodSelected.getAmount());
+                bundle.putFloat("evaluate", foodSelected.getEvaluate());
+                bundle.putBoolean("favorite", foodSelected.getFavorite());
+                navController.navigate(R.id.action_fragmentFavorite_to_fragmentFoodView, bundle);
 
             }
 
@@ -87,6 +92,12 @@ public class FragmentFavorite extends Fragment {
             public void deleteFoodFavorite(Food food, String idFood) {
                 myFoodFavoriteViewModel.deleteMyFoodFavorite(food, idFood);
                 Toast.makeText(getActivity(), "Đã xóa khỏi danh mục yêu thích!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void insertFoodFavorite(Food food, String idFood) {
+                myFoodFavoriteViewModel.addMyFoodFavorite(food);
+                Toast.makeText(getActivity(), "Đã thêm danh mục yêu thích!", Toast.LENGTH_SHORT).show();
             }
         });
         recyclerView.setAdapter(foodFavoriteAdapter);

@@ -11,6 +11,8 @@ public class Food {
     private String locationRestaurant;
     private String nameRestaurant;
     private boolean favorite;
+    private int amount;
+    private float evaluate;
 
     public Food() {
     }
@@ -28,6 +30,21 @@ public class Food {
         this.idRestaurant = idRestaurant;
         this.locationRestaurant = locationRestaurant;
         this.nameRestaurant = nameRestaurant;
+    }
+
+    public Food(String id, String idPhoto, String name, String typeFood
+            , String infomationFood, String price, String idRestaurant, String locationRestaurant, String nameRestaurant, int amount, float evaluate) {
+        this.id = id;
+        this.idPhoto = idPhoto;
+        this.name = name;
+        this.typeFood = typeFood;
+        this.infomationFood = infomationFood;
+        this.price = price;
+        this.idRestaurant = idRestaurant;
+        this.locationRestaurant = locationRestaurant;
+        this.nameRestaurant = nameRestaurant;
+        this.amount = amount;
+        this.evaluate = evaluate;
     }
 
     public Food(String id, String idPhoto, String name, String typeFood, String infomationFood
@@ -119,11 +136,28 @@ public class Food {
         return nameRestaurant;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     public boolean getFavorite() {
         return favorite;
     }
 
+
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public float getEvaluate() {
+        return evaluate;
+    }
+
+    public void setEvaluate(float evaluate) {
+        this.evaluate = evaluate;
     }
 }

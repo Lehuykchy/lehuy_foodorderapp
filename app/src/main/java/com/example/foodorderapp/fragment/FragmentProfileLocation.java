@@ -61,10 +61,20 @@ public class FragmentProfileLocation extends Fragment {
 //                onClickDeleteLocationL(location);
                 LocationUserViewModel locationUserViewModel= new LocationUserViewModel();
                 documentSnapshot = location.getId();
-                Log.d("location12", "Name: " +location.getCity() +
-                        location.getDistrict() + location.getWard() + location.getOther() + "/"+location.getId());
+
 
                 locationUserViewModel.deleteLocation(location, documentSnapshot);
+
+            }
+
+            @Override
+            public void onClickRadioBtLocation(Location location) {
+                LocationUserViewModel locationUserViewModel= new LocationUserViewModel();
+                String documentSnapshot = location.getId();
+                String locations = location.getCity()+"/ "+location.getDistrict()+"/ "+location.getWard()+"/ "+location.getOther();
+                Log.d("location12", locations + documentSnapshot);
+                locationUserViewModel.updateLocation(locations, documentSnapshot);
+                navController.navigateUp();
 
             }
         });

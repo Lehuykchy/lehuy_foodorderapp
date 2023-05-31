@@ -66,7 +66,7 @@ public class FragmentProfileRestaurantsEXXXX extends Fragment {
 //                fragment.setArguments(bundle);
 //                Log.d("bundle", "onClickRestaurant: " + fragment);
 //                getActivity().startActivity(intent);
-                navController.navigate(R.id.action_fragmentProfileRestaurantsEXXXX_to_fragmentProfileRestaurantsMenuEXXXX, bundle);
+                navController.navigate(R.id.action_fragmentProfileRestaurantsEXXXX_to_fragmentProfileRestaurantsMenuEXXXX2, bundle);
 
 
             }

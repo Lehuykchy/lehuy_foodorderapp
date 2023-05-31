@@ -31,6 +31,7 @@ public class LocationUserAdapter extends RecyclerView.Adapter<LocationUserAdapte
 
     public interface IClickListener {
         void onClickDeleteLocation(Location location, String documentSnapshot);
+        void onClickRadioBtLocation(Location location);
     }
 
     public LocationUserAdapter(Context context, List<Location> listLocation, IClickListener iClickListener){
@@ -67,16 +68,17 @@ public class LocationUserAdapter extends RecyclerView.Adapter<LocationUserAdapte
         holder.tvProfileLocationOther.setText(other);
         holder.tvProfileLocationMain.setText(city + "/" + districk +"/" + ward);
 
-//        holder.radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked){
-//                    for(int i = 0; i < listLocation.size(); i++){
-//                        listLocation.get(i).set
-//                    }
-//                }
-//            }
-//        });
+        holder.radioButton.setChecked(position == mSelectedItem);
+        int point = position;
+        holder.radioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSelectedItem =point;
+                notifyDataSetChanged();
+                mIClickListener.onClickRadioBtLocation(location);
+
+            }
+        });
 
         holder.deleteLocation.setOnClickListener(new View.OnClickListener() {
             @Override

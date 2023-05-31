@@ -7,17 +7,8 @@
     tools:context=".activity.MainActivity">
 
 
-        <FrameLayout
-        android:id="@+id/frame_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_above="@+id/navigation_butom"/>
-
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation_butom"
+        android:id="@+id/navigation_buttom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -26,18 +17,14 @@
         app:itemTextColor="@color/custom_color_buttom"
         app:menu="@menu/item_menu" />
 
-<!--    <androidx.fragment.app.FragmentContainerView-->
-<!--        android:id="@+id/nav_host_fragment"-->
-<!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="1"-->
-<!--        app:defaultNavHost="true"-->
-<!--        app:navGraph="@navigation/navigation_home"-->
-<!--        tools:layout="@layout/fragment_home" />-->
-
-
-
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation"
+        android:layout_above="@+id/navigation_buttom"/>
 
 
 </RelativeLayout>

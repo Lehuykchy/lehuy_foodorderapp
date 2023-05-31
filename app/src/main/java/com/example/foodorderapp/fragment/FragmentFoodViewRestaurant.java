@@ -44,12 +44,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+
 public class FragmentFoodViewRestaurant extends Fragment {
     private View mView;
     private NavController navController;
     private ImageView imgFood,  imgFoodResHeart, imgAddFood;
     private Button btAddFoodToCard;
-    private TextView tvFoodName, tvFoodPrice, tvFoodInfo, tvFoodCount, tvFoodresPriceSum, tvFoodresPrice;
+    private TextView tvFoodName, tvFoodPrice, tvFoodInfo, tvFoodresPriceSum, tvFoodresPrice, tvFoodEvaluate, tvFoodCountSelled;
     private EditText edtFoodresAmount;
     private LinearLayout linearLayoutAddcart;
     private MyFoodFavoriteViewModel myFoodFavoriteViewModel;
@@ -81,6 +83,8 @@ public class FragmentFoodViewRestaurant extends Fragment {
         String namerestaurant = getArguments().getString("namerestaurant", null);
         String locationRes = getArguments().getString("locationrestaurant", null);
         String typeFood = getArguments().getString("typefood", null);
+        int amountt = getArguments().getInt("amount", 0);
+        float evaluate = getArguments().getFloat("evaluate", 0);
 
         imgAddFood.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,7 +142,7 @@ public class FragmentFoodViewRestaurant extends Fragment {
             @Override
             public void onClick(View v) {
                 Food food = new Food(idFood, idPhotoFood, nameFood, typeFood, infoFood
-                        , priceFood, idrestaurant, locationRes, namerestaurant  );
+                        , priceFood, idrestaurant, locationRes, namerestaurant, amountt, evaluate);
                 Cart cart = new Cart(food, Integer.parseInt(edtFoodresAmount.getText().toString()));
                 CartViewModel cartViewModel = new CartViewModel();
 
@@ -242,10 +246,20 @@ public class FragmentFoodViewRestaurant extends Fragment {
         String namerestaurant = getArguments().getString("namerestaurant", null);
         String locationRes = getArguments().getString("locationrestaurant", null);
         String typeFood = getArguments().getString("typefood", null);
+        int amountt = getArguments().getInt("amount", 0);
+        float evaluate = getArguments().getFloat("evaluate", 0);
 
+        int decimalPlaces = 1;
+
+        DecimalFormat decimalFormat = new DecimalFormat();
+        decimalFormat.setMaximumFractionDigits(decimalPlaces);
+        decimalFormat.setMinimumFractionDigits(decimalPlaces);
+        String roundedNumber = decimalFormat.format(evaluate);
         tvFoodName.setText(nameFood);
         tvFoodPrice.setText(priceFood +" vnđ");
         tvFoodInfo.setText(infoFood);
+        tvFoodEvaluate.setText(roundedNumber);
+        tvFoodCountSelled.setText(String.valueOf(amountt));
 
         if(idPhotoFood == null || idPhotoFood == "") {
             return;
@@ -277,7 +291,8 @@ public class FragmentFoodViewRestaurant extends Fragment {
         tvFoodName = mView.findViewById(R.id.tvfoodres_name);
         tvFoodPrice = mView.findViewById(R.id.tvfoodres_price);
         tvFoodInfo = mView.findViewById(R.id.tvfoodres_info);
-        tvFoodCount = mView.findViewById(R.id.tvfoodres_count);
+        tvFoodCountSelled = mView.findViewById(R.id.tvfoodres_countselled);
+        tvFoodEvaluate = mView.findViewById(R.id.tv_foodresevaluate);
         imgFoodResHeart = mView.findViewById(R.id.img_foodresheart);
         imgAddFood = mView.findViewById(R.id.imgres_click);
         btAddFoodToCard = mView.findViewById(R.id.btaddfoodres_tocard);

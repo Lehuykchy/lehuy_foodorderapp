@@ -1,7 +1,7 @@
 package com.example.foodorderapp.fragment;
 
 
-import static com.example.foodorderapp.activity.MainActivity.MY_REQUEST_CODE;
+
 
 import android.Manifest;
 import android.app.Activity;

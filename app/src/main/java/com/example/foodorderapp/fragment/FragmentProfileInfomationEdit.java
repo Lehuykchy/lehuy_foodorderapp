@@ -45,7 +45,7 @@ public class FragmentProfileInfomationEdit extends Fragment {
             @Override
             public void onClick(View v) {
                 onClickUpdateInfo();
-                navController.navigateUp();
+
             }
         });
 
@@ -72,13 +72,19 @@ public class FragmentProfileInfomationEdit extends Fragment {
         String phone = edtProfileInfoPhone.getText().toString();
         String email = firebaseUser.getEmail();
         String gender = edtProfileInfoGender.getText().toString();
-        String date = edtProfileInfoDate.getText().toString();
+        String date = edtProfileInfoDate.getText().toString();;
+        String location = null;
 
-        Customer customer = new Customer(id, name, phone, date, email, gender);
+        boolean check = checkValues(name, phone, date, gender);
+        if(check) {
 
-        CustomerViewModel customerViewModel= new ViewModelProvider(this).get(CustomerViewModel.class);
-        customerViewModel.addCustomer(customer);
-        Toast.makeText(getActivity(), "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+            Customer customer = new Customer(id, name, phone, date, email, gender, location);
+
+            CustomerViewModel customerViewModel = new ViewModelProvider(this).get(CustomerViewModel.class);
+            customerViewModel.addCustomer(customer);
+            Toast.makeText(getActivity(), "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+            navController.navigateUp();
+        }
 
 
 
@@ -94,5 +100,24 @@ public class FragmentProfileInfomationEdit extends Fragment {
         edtProfileInfoEmail = mView.findViewById(R.id.edtprofileinfo_email);
         btUpdate = mView.findViewById(R.id.btsaveupdate_info);
         edtProfileInfoEmail.setText(firebaseUser.getEmail());
+    }
+    private boolean checkValues(String name, String phone, String date, String gender){
+        if(name.isEmpty()){
+            edtProfileInfoName.setError("Nhập thông tin!");
+            return false;
+        }
+        if(phone.isEmpty()){
+            edtProfileInfoPhone.setError("Nhập thông tin!");
+            return false;
+        }
+        if(date.isEmpty()){
+            edtProfileInfoDate.setError("Nhập thông tin!");
+            return false;
+        }
+        if(gender.isEmpty()){
+            edtProfileInfoGender.setError("Nhập thông tin!");
+            return false;
+        }
+        return true;
     }
 }

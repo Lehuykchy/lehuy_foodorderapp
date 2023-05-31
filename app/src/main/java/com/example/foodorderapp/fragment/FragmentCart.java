@@ -53,11 +53,13 @@ public class FragmentCart extends Fragment {
             }
         }).attach();
 
+
     }
 
+
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        navController = Navigation.findNavController(view);
+    public void onResume() {
+        super.onResume();
+        mView.invalidate();
     }
 }

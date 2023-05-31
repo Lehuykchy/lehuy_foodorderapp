@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +34,7 @@ public class FoodFavoriteAdapter extends RecyclerView.Adapter<FoodFavoriteAdapte
     public interface IcLickItemFoodFavoriteListener{
         void onClickItemFoodFavorite(int positio);
         void deleteFoodFavorite(Food food, String idFood);
+        void insertFoodFavorite(Food food, String idFood);
     }
 
     public FoodFavoriteAdapter(List<Food> listFood, Context context
@@ -74,10 +76,25 @@ public class FoodFavoriteAdapter extends RecyclerView.Adapter<FoodFavoriteAdapte
         holder.imgFoodItemHeart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listFood.remove(food);
-                notifyDataSetChanged();
-                icLickItemFoodFavoriteListener.deleteFoodFavorite(food, food.getId());
-                imgFoodItemHeart.setImageResource(R.drawable.heart);
+//                imgFoodItemHeart.setImageResource(R.drawable.heart);
+//                notifyDataSetChanged();
+//                icLickItemFoodFavoriteListener.deleteFoodFavorite(food, food.getId());
+
+                Drawable currentDrawable = imgFoodItemHeart.getDrawable();
+                Drawable normalDrawable = context.getResources().getDrawable(R.drawable.heart);
+                Drawable newDrawable = context.getResources().getDrawable(R.drawable.heart1);
+                // So sánh hình ảnh hiện tại với hình ảnh mặc định
+                if (currentDrawable.getConstantState().equals(newDrawable.getConstantState())) {
+                    imgFoodItemHeart.setImageResource(R.drawable.heart);
+                    notifyDataSetChanged();
+                    icLickItemFoodFavoriteListener.deleteFoodFavorite(food, food.getId());
+                } else {
+                    imgFoodItemHeart.setImageDrawable(newDrawable);
+                    icLickItemFoodFavoriteListener.insertFoodFavorite(food, food.getId());
+                    notifyDataSetChanged();
+
+                }
+
 
             }
         });

@@ -18,4 +18,8 @@
         <item>Khác</item>
     </string-array>
     <item name="imgaddfood_image" type="id" />
+    <item name="tv_foodcartpaysumprice" type="id" />
+    <item name="tv_itemfoodcartpayship" type="id" />
+    <item name="rlt_receiver" type="id" />
+    <item name="rlt_getbill" type="id" />
 </resources>

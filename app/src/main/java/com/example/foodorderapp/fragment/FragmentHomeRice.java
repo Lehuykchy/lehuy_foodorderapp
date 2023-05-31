@@ -57,6 +57,11 @@ public class FragmentHomeRice extends Fragment {
                 bundle.putString("pricefood", foodSelected.getPrice());
                 bundle.putString("infofood", foodSelected.getInfomationFood());
                 bundle.putString("idrestaurant", foodSelected.getIdRestaurant());
+                bundle.putString("locationrestaurant", foodSelected.getLocationRestaurant());
+                bundle.putString("namerestaurant", foodSelected.getNameRestaurant());
+                bundle.putString("typefood", foodSelected.getTypeFood());
+                bundle.putInt("amount", foodSelected.getAmount());
+                bundle.putFloat("evaluate", foodSelected.getEvaluate());
                 navController.navigate(R.id.action_fragmentHomeRice_to_fragmentFoodView, bundle);
             }
         });

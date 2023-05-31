@@ -107,7 +107,7 @@ public class FragmentProfileRestaurantsMenuEXXXX extends Fragment {
                 bundle.putString("nameRestaurant", itemName);
                 bundle.putString("locationRestaurant", itemLocation);
                 Log.d("testdb", "onCreateView: " + itemId + itemName + itemLocation);
-                navController.navigate(R.id.action_fragmentProfileRestaurantsMenuEXXXX_to_fragmentProfileRestaurantsAddFoodEXXXX, bundle);
+                navController.navigate(R.id.action_fragmentProfileRestaurantsMenuEXXXX2_to_fragmentProfileRestaurantsAddFoodEXXXX, bundle);
             }
         });
     }

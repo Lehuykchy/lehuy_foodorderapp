@@ -54,6 +54,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class FragmentFoodView extends Fragment {
     private View mView;
     private NavController navController;
     private ImageView imgFood, imgAddFood, imgFoodCartHeart;
-    private TextView tvFoodName, tvFoodPrice, tvFoodInfo, tvFoodPriceSum;
+    private TextView tvFoodName, tvFoodPrice, tvFoodInfo, tvFoodPriceSum, tvFoodCartEvaluate, tvFoodCountSelled;
     private View lnAddToCard;
     private EditText edtFoodAmount;
     private Button btAddFoodToCard;
@@ -104,6 +105,8 @@ public class FragmentFoodView extends Fragment {
         String namerestaurant = getArguments().getString("namerestaurant", null);
         String locationRes = getArguments().getString("locationrestaurant", null);
         String typeFood = getArguments().getString("typefood", null);
+        int amountt = getArguments().getInt("amount", 0);
+        float evaluate = getArguments().getFloat("evaluate", 0);
         //button add food
         imgAddFood.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,7 +164,7 @@ public class FragmentFoodView extends Fragment {
             @Override
             public void onClick(View v) {
                 Food food = new Food(idFood, idPhotoFood, nameFood, typeFood, infoFood
-                        , priceFood, idrestaurant, locationRes, namerestaurant  );
+                        , priceFood, idrestaurant, locationRes, namerestaurant , amountt, evaluate);
                 Cart cart = new Cart(food, Integer.parseInt(edtFoodAmount.getText().toString()));
                 CartViewModel cartViewModel = new CartViewModel();
 
@@ -331,10 +334,21 @@ public class FragmentFoodView extends Fragment {
         String idPhotoFood = getArguments().getString("idphotofood", null);
         String priceFood = getArguments().getString("pricefood", null);
         String infoFood = getArguments().getString("infofood", null);
+        int amountt = getArguments().getInt("amount", 0);
+        float evaluate = getArguments().getFloat("evaluate", 0);
+
+        int decimalPlaces = 1;
+
+        DecimalFormat decimalFormat = new DecimalFormat();
+        decimalFormat.setMaximumFractionDigits(decimalPlaces);
+        decimalFormat.setMinimumFractionDigits(decimalPlaces);
+        String roundedNumber = decimalFormat.format(evaluate);
 
         tvFoodName.setText(nameFood);
         tvFoodPrice.setText(priceFood +" vnđ");
         tvFoodInfo.setText(infoFood);
+        tvFoodCountSelled.setText(String.valueOf(amountt));
+        tvFoodCartEvaluate.setText(roundedNumber);
 
         if(idPhotoFood == null || idPhotoFood == "") {
             return;
@@ -374,6 +388,8 @@ public class FragmentFoodView extends Fragment {
         recyclerView = mView.findViewById(R.id.rcv_listfoodview);
         imgAddFood = mView.findViewById(R.id.img_clickadd);
         imgFoodCartHeart = mView.findViewById(R.id.img_foodcartheart);
+        tvFoodCountSelled = mView.findViewById(R.id.tvfood_countselled);
+        tvFoodCartEvaluate = mView.findViewById(R.id.tv_foodcartevaluate);
         myFoodFavoriteViewModel = new MyFoodFavoriteViewModel();
 
         getRecycleViewDataFood();
@@ -394,25 +410,23 @@ public class FragmentFoodView extends Fragment {
                 bundle.putString("locationrestaurant", foodSelected.getLocationRestaurant());
                 bundle.putString("namerestaurant", foodSelected.getName());
                 bundle.putString("typefood", foodSelected.getTypeFood());
+                bundle.putInt("amount", foodSelected.getAmount());
+                bundle.putFloat("evaluate", foodSelected.getEvaluate());
                 NavController navController = Navigation.findNavController(mView);
-
+                navController.navigate(R.id.action_fragmentFoodView_to_fragmentFoodViewRestaurant, bundle);
                 // Lấy thông tin về fragment hiện tại
-                NavDestination currentDestination = navController.getCurrentDestination();
-                if (currentDestination instanceof FragmentNavigator.Destination) {
-                    String currentFragmentTag = ((FragmentNavigator.Destination) currentDestination).getClassName();
-                }
-
-                // Lấy thông tin về action trước đó
-                NavBackStackEntry previousBackStackEntry = navController.getPreviousBackStackEntry();
-                if (previousBackStackEntry != null) {
-                    String previousDestinationName = previousBackStackEntry.getDestination().getDisplayName();
-                    if(previousDestinationName.equals("com.example.foodorderapp:id/fragmentFavorite")){
-                        navController.navigate(R.id.action_fragmentFoodView2_to_fragmentFoodViewRestaurant2, bundle);
-                    }else {
-                        navController.navigate(R.id.action_fragmentFoodView_to_fragmentFoodViewRestaurant, bundle);
-                    }
-                    Log.d("abcde", previousDestinationName);
-                }
+//                NavDestination currentDestination = navController.getCurrentDestination();
+//                if (currentDestination instanceof FragmentNavigator.Destination) {
+//                    String currentFragmentTag = ((FragmentNavigator.Destination) currentDestination).getClassName();
+//                }
+//
+//                // Lấy thông tin về action trước đó
+//                NavBackStackEntry previousBackStackEntry = navController.getPreviousBackStackEntry();
+//                if (previousBackStackEntry != null) {
+//                    String previousDestinationName = previousBackStackEntry.getDestination().getDisplayName();
+//                        navController.navigate(R.id.action_fragmentFoodView_to_fragmentFoodViewRestaurant, bundle);
+//                    Log.d("abcde", previousDestinationName);
+//                }
             }
         });
         recyclerView.setAdapter(foodAdapter);

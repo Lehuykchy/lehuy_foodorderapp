@@ -3,9 +3,13 @@ package com.example.foodorderapp.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +52,8 @@ public class FragmentHome extends Fragment {
     private List<Food> listFood;
     private FoodAdapter foodAdapter;
     private RecyclerView recyclerViewListFood;
+    private EditText edtHomeSearchFood;
+    private ImageView imgSearchHome;
     private Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
@@ -72,9 +78,37 @@ public class FragmentHome extends Fragment {
         onClickBtHomeSnacks();
         onClickBtHomeNoodles();
         onClickTvHomeHotFood();
+        eventSearchyFood();
 
 
         return mView;
+    }
+
+    private void eventSearchyFood() {
+//        edtHomeSearchFood.setSingleLine();
+//        edtHomeSearchFood.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_DONE || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+//                    navController.navigate(R.id.action_fragmentHome_to_fragmentHomeSearch);
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+
+
+
+        imgSearchHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String keyFood = edtHomeSearchFood.getText().toString();
+                Bundle bundle = new Bundle();
+                bundle.putString("keyFood", keyFood);
+                navController.navigate(R.id.action_fragmentHome_to_fragmentHomeSearch, bundle);
+            }
+        });
+
     }
 
     private void onClickTvHomeHotFood() {
@@ -134,6 +168,8 @@ public class FragmentHome extends Fragment {
         btHomeSnacks = mView.findViewById(R.id.bthome_snacks);
         btHomeNoodles = mView.findViewById(R.id.bthome_noodles);
         tvHomeHotFood = mView.findViewById(R.id.tvhome_hotfood);
+        edtHomeSearchFood = mView.findViewById(R.id.edt_homesearchfood);
+        imgSearchHome = mView.findViewById(R.id.img_searchhome);
         viewPager2PhotoBanner = mView.findViewById(R.id.viewpager2_photobanner);
         circleIndicator3 = mView.findViewById(R.id.homeindicator_3);
 
@@ -178,12 +214,17 @@ public class FragmentHome extends Fragment {
                 bundle.putString("locationrestaurant", foodSelected.getLocationRestaurant());
                 bundle.putString("namerestaurant", foodSelected.getNameRestaurant());
                 bundle.putString("typefood", foodSelected.getTypeFood());
+                bundle.putInt("amount", foodSelected.getAmount());
+                bundle.putFloat("evaluate", foodSelected.getEvaluate());
 
                 navController.navigate(R.id.action_fragmentHome_to_fragmentFoodView, bundle);
 
             }
         });
+
+
         recyclerViewListFood.setAdapter(foodAdapter);
+
 
 
     }

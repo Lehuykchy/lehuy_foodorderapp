@@ -121,8 +121,10 @@ public class FragmentProfileRestaurantsAddFoodEXXXX extends Fragment{
             String fileName = name + idRestaurant + ".jpg";
             String idPhoto = "gs://foodorderdb-16679.appspot.com/images/"+fileName;
             String idfood = "";
+            int amount = 0;
+            Float evaluate = Float.valueOf(5);
             Log.d("restaurants", nameRestaurant + location);
-            Food food = new Food(idfood, idPhoto, name, foodType, foodInfo, price, idRestaurant, location, nameRestaurant);
+            Food food = new Food(idfood, idPhoto, name, foodType, foodInfo, price, idRestaurant, location, nameRestaurant, amount, evaluate);
             boolean check = checkValues(name, price);
 
             if(check){

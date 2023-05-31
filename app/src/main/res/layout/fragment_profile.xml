@@ -1,211 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#23111111">
-
+    android:layout_height="match_parent">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#FB6704"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="#23111111"
+        android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgprofile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/imgprofile"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#FB6704"
+            android:orientation="horizontal">
 
-
-        <TextView
-            android:id="@+id/tvprofile_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="Ten tài khoản"
-            android:padding="20dp"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/imgv_editname"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center"
-            android:src="@drawable/pen"
-            app:tint="@color/white" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:background="@color/white">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/resume"
-            app:tint="#FB6704"/>
-
-        <TextView
-            android:id="@+id/tvprofile_profileinfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thông tin cá nhân"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgprofile"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/imgprofile" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:background="@color/white">
-        
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/location"
-            app:tint="#FB6704"/>
+            <TextView
+                android:id="@+id/tvprofile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Ten tài khoản"
+                android:padding="20dp"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvprofile_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Dia chi"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/imgv_editname"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/pen"
+                app:tint="@color/white" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:background="@color/white">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/support"
-            app:tint="#FB6704"/>
-
-        <TextView
-            android:id="@+id/tvprofile_support"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Trung tâm hỗ trợ"
-            android:paddingLeft="10dp"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:background="@color/white">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/policy"
-            app:tint="#FB6704"/>
-
-        <TextView
-            android:id="@+id/tvprofile_policy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chính sách quy định"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:background="@color/white">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/password"
-            app:tint="#FB6704"/>
-
-        <TextView
-            android:id="@+id/tvprofile_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đổi mật khẩu"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:background="@color/white">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_add_24"
-            app:tint="#FB6704"/>
-
-        <TextView
-            android:id="@+id/tvprofile_addfood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thêm món ăn"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="40dp"
-        android:layout_weight="1"
-        android:padding="10dp">
-
-        <Button
-            android:id="@+id/btprofile_logout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#FB6704"
-            android:text="Logout" />
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/resume"
+                app:tint="#FB6704" />
+
+            <TextView
+                android:id="@+id/tvprofile_profileinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="Thông tin cá nhân" />
+        </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/location"
+                app:tint="#FB6704" />
+
+            <TextView
+                android:id="@+id/tvprofile_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:hint="Dia chi" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/support"
+                app:tint="#FB6704" />
+
+            <TextView
+                android:id="@+id/tvprofile_support"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="10dp"
+                android:text="Trung tâm hỗ trợ" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/policy"
+                app:tint="#FB6704" />
+
+            <TextView
+                android:id="@+id/tvprofile_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="Chính sách quy định" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/password"
+                app:tint="#FB6704" />
+
+            <TextView
+                android:id="@+id/tvprofile_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="Đổi mật khẩu" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_add_24"
+                app:tint="#FB6704" />
+
+            <TextView
+                android:id="@+id/tvprofile_addfood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="Thêm món ăn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tvprofile_shipper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_add_24"
+                app:tint="#FB6704" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="Shipper" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/support"
+                app:tint="#FB6704" />
+
+            <TextView
+                android:id="@+id/tvprofile_support_admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="10dp"
+                android:text="Trung tâm hỗ trợ (admin)" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btprofile_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FB6704"
+                android:text="Logout" />
+
+
+        </LinearLayout>
     </LinearLayout>
-
-<!--    <androidx.fragment.app.FragmentContainerView-->
-<!--        android:id="@+id/fragmentContainerView"-->
-<!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_weight="1"-->
-<!--        app:defaultNavHost="true"-->
-<!--        app:navGraph="@navigation/navigation_profile" />-->
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>
