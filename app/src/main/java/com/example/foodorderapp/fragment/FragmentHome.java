@@ -1,5 +1,6 @@
 package com.example.foodorderapp.fragment;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -23,16 +24,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
 import com.example.foodorderapp.R;
 import com.example.foodorderapp.adapter.FoodAdapter;
 import com.example.foodorderapp.adapter.PhotoBannerAdapter;
 import com.example.foodorderapp.model.Food;
 import com.example.foodorderapp.model.PhotoBanner;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -200,7 +207,7 @@ public class FragmentHome extends Fragment {
         recyclerViewListFood = mView.findViewById(R.id.rcv_listfood);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerViewListFood.setLayoutManager(linearLayoutManager);
-        foodAdapter = new FoodAdapter(listFood, new FoodAdapter.ICLickItemFoodListener() {
+        foodAdapter = new FoodAdapter(getActivity(),listFood, new FoodAdapter.ICLickItemFoodListener() {
             @Override
             public void onClickItemFood(int position) {
                 Food foodSelected = foodAdapter.GetFoodByPosition(position);

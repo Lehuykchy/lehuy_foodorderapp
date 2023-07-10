@@ -2,32 +2,41 @@ package com.example.foodorderapp.model;
 
 public class Messages {
 
-    private String massage;
-    private String id;
+    private String message;
+    private String sendID;
+    private String time;
 
-    public Messages(String massage, String id) {
-        this.massage = massage;
-        this.id = id;
+
+    public Messages(String message, String sendID, String time) {
+        this.message = message;
+        this.sendID = sendID;
+        this.time = time;
     }
 
     public Messages() {
     }
 
-    public String getMassage() {
-        return massage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMassage(String massage) {
-        this.massage = massage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getId() {
-        return id;
+    public String getSendID() {
+        return sendID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSendID(String sendID) {
+        this.sendID = sendID;
     }
 
+    public String getTime() {
+        return time;
+    }
 
+    public void setTime(String time) {
+        this.time = time;
+    }
 }

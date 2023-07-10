@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteX="-41dp">
 
         <ImageView
-            android:id="@+id/imgcentersp_back"
+            android:id="@+id/imgcentresp_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -40,25 +40,22 @@
         android:id="@+id/rcv_chatcenter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/fab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.02" />
+        app:layout_constraintVertical_bias="0.02"
+        android:padding="10dp"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgaddmes"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_add"
         android:layout_gravity="bottom|end"
-        app:elevation="6dp"
-        android:onClick="newChatTapped"
-        app:pressedTranslationZ="12dp"/>
+        android:src="@drawable/add_messegae"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

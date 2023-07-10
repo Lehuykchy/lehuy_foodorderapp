@@ -139,7 +139,7 @@ public class FragmentHomeSearch extends Fragment {
         listFood = new ArrayList<>();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-        foodAdapter = new FoodAdapter(listFood, new FoodAdapter.ICLickItemFoodListener() {
+        foodAdapter = new FoodAdapter(getActivity(), listFood, new FoodAdapter.ICLickItemFoodListener() {
             @Override
             public void onClickItemFood(int position) {
                 Food foodSelected = foodAdapter.GetFoodByPosition(position);

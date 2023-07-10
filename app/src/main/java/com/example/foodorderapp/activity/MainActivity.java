@@ -34,34 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        navController.setGraph(R.navigation.navigation);
-//        bottomNavigationView = findViewById(R.id.navigation_butom);
-//        NavigationUI.setupWithNavController(bottomNavigationView, navController);
-//        navController.navigate(R.id.fragmentHome);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                int id = item.getItemId();
-//                if(id == R.id.navigation_home){
-//                    navController.navigate(R.id.fragmentHome);
-//                    return true;
-//                } else if(id == R.id.navigation_cart){
-//                    navController.navigate(R.id.fragmentCart);
-//                    return true;
-//                } else if(id == R.id.navigation_favorite){
-//                    navController.navigate(R.id.fragmentFavorite);
-//                    return true;
-//                } else if(id == R.id.navigation_notifications){
-//                    navController.navigate(R.id.fragmentNotification);
-//                    return true;
-//                } else if(id == R.id.navigation_profile){
-//                    navController.navigate(R.id.fragmentProfile);
-//                    return true;
-//                }
-//                return false;
-//            }
-     //   });
+
     }
 
 

@@ -39,7 +39,7 @@ public class FragmentProfile extends Fragment {
     private NavController navController;
     private View mView;
     private TextView tvProfileName,tvprofileProfileInfo,
-            tvProfileCenterSp, tvProfileChangePassword, tvProfileRegulaytoryPolicy, tvProfileLocation, tvRestaurant;
+            tvProfileCenterSp, tvProfileChangePassword, tvProfileRegulaytoryPolicy, tvProfileLocation, tvRestaurant, tvProfileSupportAdmin;
     private LinearLayout tvProfileShipper;
     private ImageView imgProfile, imgEditname;
     private Button btLogout;
@@ -59,6 +59,7 @@ public class FragmentProfile extends Fragment {
         onClickBtLogout();
         onClickImgEditName();
         eventOnClickOther();
+        onClickTvProfileSPAdmin();
 
 
 
@@ -209,6 +210,15 @@ public class FragmentProfile extends Fragment {
         });
     }
 
+    private void onClickTvProfileSPAdmin(){
+        tvProfileSupportAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_fragmentProfile_to_fragmentProfileCentreSPAdmin);
+            }
+        });
+    }
+
 
 
 
@@ -225,6 +235,7 @@ public class FragmentProfile extends Fragment {
         tvProfileLocation = mView.findViewById(R.id.tvprofile_location);
         tvRestaurant = mView.findViewById(R.id.tvprofile_addfood);
         tvProfileShipper = mView.findViewById(R.id.tvprofile_shipper);
+        tvProfileSupportAdmin = mView.findViewById(R.id.tvprofile_support_admin);
     }
 
 

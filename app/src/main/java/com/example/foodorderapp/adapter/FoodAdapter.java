@@ -1,6 +1,7 @@
 package com.example.foodorderapp.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodorderapp.R;
 import com.example.foodorderapp.model.BillFood;
 import com.example.foodorderapp.model.Food;
@@ -26,6 +28,7 @@ import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
     private List<Food> listFood;
+    private Context context;
 //    private FoodAdapter.IFoodListener iFoodListener;
 //
 //    public interface IFoodListener(){
@@ -35,9 +38,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public interface ICLickItemFoodListener{
         void onClickItemFood(int position);
     }
-    public FoodAdapter(List<Food> listFood, FoodAdapter.ICLickItemFoodListener icLickItemFoodListener) {
+    public FoodAdapter(Context context,List<Food> listFood, FoodAdapter.ICLickItemFoodListener icLickItemFoodListener) {
         this.listFood = listFood;
         this.icLickItemFoodListener = icLickItemFoodListener;
+        this.context = context;
     }
 
     @NonNull
@@ -58,7 +62,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         holder.tvName.setText(food.getName() + " - " + food.getNameRestaurant());
         holder.tvLocation.setText(food.getLocationRestaurant());
         holder.tvPrice.setText(food.getPrice() + " vnđ");
-        String idPhoto = food.getIdPhoto().toString().trim();
+        String idPhoto = food.getIdPhoto();
         Log.d("testuri", idPhoto);
         if(idPhoto == null || idPhoto == "") {
             return;
@@ -71,7 +75,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                     @Override
                     public void onSuccess(Uri uri) {
                         String downloadUrl = uri.toString();
-                        Picasso.get().load(downloadUrl).error(R.drawable.baseline_image_24).into(imageView);
+                        Picasso.get().load(downloadUrl).into(imageView);
+                        Glide.with(context).load(downloadUrl).into(imageView);
+                        Log.d("tag", "onSuccess: "+downloadUrl);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

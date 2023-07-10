@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4B111111">
+    android:background="#0F111111"
+    android:id="@+id/activityview">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -11,7 +12,7 @@
         android:background="@color/maucam">
 
         <ImageView
-            android:id="@+id/imgcentersp_back"
+            android:id="@+id/imgcentrespchat_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -31,10 +32,12 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@id/rcvcentrespchat"
         android:layout_below="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:layout_above="@+id/fdfdfdfdfdf"/>
 
 
     <LinearLayout
@@ -42,16 +45,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:gravity="center"
+        android:alpha="0.8"
+        android:id="@+id/fdfdfdfdfdf">
 
         <EditText
-            android:layout_width="350dp"
+            android:id="@+id/edtcentrespchat"
+            android:layout_width="300dp"
             android:layout_height="40dp"
             android:background="@drawable/button_login"
             android:backgroundTint="@color/white"
-            android:hint="   Aa"/>
+            android:hint="Aa"
+            android:padding="10dp" />
 
         <TextView
+            android:id="@+id/tvcentrespsend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gửi"

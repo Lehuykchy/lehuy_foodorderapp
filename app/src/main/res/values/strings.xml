@@ -22,4 +22,5 @@
     <item name="tv_itemfoodcartpayship" type="id" />
     <item name="rlt_receiver" type="id" />
     <item name="rlt_getbill" type="id" />
+    <item name="rcvcentrespchat" type="id" />
 </resources>

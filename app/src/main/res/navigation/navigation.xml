@@ -87,6 +87,9 @@
         <action
             android:id="@+id/action_fragmentProfile_to_fragmentProfileShipper"
             app:destination="@id/fragmentProfileShipper" />
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentProfileCentreSPAdmin"
+            app:destination="@id/fragmentProfileCentreSPAdmin" />
     </fragment>
     <fragment
         android:id="@+id/fragmentNotification"
@@ -150,8 +153,12 @@
         android:label="FragmentProfileAddLocation" />
     <fragment
         android:id="@+id/fragmentProfileCenterSupport"
-        android:name="com.example.foodorderapp.fragment.FragmentProfileCenterSupport"
-        android:label="FragmentProfileCenterSupport" />
+        android:name="com.example.foodorderapp.fragment.FragmentProfileCentreSupport"
+        android:label="FragmentProfileCenterSupport" >
+        <action
+            android:id="@+id/action_fragmentProfileCenterSupport_to_fragmentProfileCentreSPChat"
+            app:destination="@id/fragmentProfileCentreSPChat" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentProfileChangePassword"
         android:name="com.example.foodorderapp.fragment.FragmentProfileChangePassword"
@@ -280,5 +287,28 @@
         <action
             android:id="@+id/action_fragmentHomeSearch_to_fragmentFoodView"
             app:destination="@id/fragmentFoodView" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentProfileCentreSPAdmin"
+        android:name="com.example.foodorderapp.fragment.FragmentProfileCentreSPAdmin"
+        android:label="FragmentProfileCentreSPAdmin" >
+        <action
+            android:id="@+id/action_fragmentProfileCentreSPAdmin_to_fragmentProfileCentreAdminMesRev"
+            app:destination="@id/fragmentProfileCentreAdminMesRev" />
+        <action
+            android:id="@+id/action_fragmentProfileCentreSPAdmin_to_fragmentProfileCentreSPChat"
+            app:destination="@id/fragmentProfileCentreSPChat" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentProfileCentreSPChat"
+        android:name="com.example.foodorderapp.fragment.FragmentProfileCentreSPChat"
+        android:label="FragmentProfileCentreSPChat" />
+    <fragment
+        android:id="@+id/fragmentProfileCentreAdminMesRev"
+        android:name="com.example.foodorderapp.fragment.FragmentProfileCentreAdminMesRev"
+        android:label="FragmentProfileCentreAdminMesRev" >
+        <action
+            android:id="@+id/action_fragmentProfileCentreAdminMesRev_to_fragmentProfileCentreSPChat"
+            app:destination="@id/fragmentProfileCentreSPChat" />
     </fragment>
 </navigation>
