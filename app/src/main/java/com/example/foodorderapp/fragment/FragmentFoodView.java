@@ -441,4 +441,17 @@ public class FragmentFoodView extends Fragment {
             navController.navigateUp();
         });
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Thực hiện các hành động khi fragment bị xóa view
+        // Ví dụ: Hủy đăng ký các sự kiện hoặc giải phóng tài nguyên liên quan đến giao diện người dùng
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        // Thực hiện các hành động khi fragment bị detach khỏi Activity
+        // Ví dụ: Xóa các tham chiếu đến Activity hoặc các đối tượng liên quan
+    }
 }

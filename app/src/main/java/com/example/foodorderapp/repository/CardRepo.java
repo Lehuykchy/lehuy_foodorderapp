@@ -10,5 +10,7 @@ public interface CardRepo {
     void deleteFoodCart(Cart cart, String documentSnapshot);
 
     void updateFoodCart(int amount, String documentSnapshot);
+    void updateFoodCartCheckBox(boolean check, String documentSnapshot);
+
 
 }

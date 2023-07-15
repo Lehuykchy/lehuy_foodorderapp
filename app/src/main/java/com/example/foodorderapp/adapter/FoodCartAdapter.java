@@ -38,6 +38,7 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
     private List<Cart> listCart, listCartSell;
     private FoodCartAdapter.IClickItem iClickItem;
     private Context context;
+    private Cart cart;
 
     public FoodCartAdapter(List<Cart> listCartSell, Context context) {
         this.listCartSell = listCartSell;
@@ -46,7 +47,7 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
 
     public interface IClickItem{
         void clickDeleteFoodCart(Cart cart, String documentSnapshot);
-        void clickAddCheckBoxFoodToCart(Cart cart, boolean ischecked);
+        void clickAddCheckBoxFoodToCart(Cart cart, boolean ischecked, String documentSnapshot);
         void updateAmountFood(Cart cart,int amount, String documentSnapshot);
     }
     public FoodCartAdapter(Context context, List<Cart> listCart, FoodCartAdapter.IClickItem iClickItem) {
@@ -74,6 +75,7 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
         final TextView tvFoodPriceSum =  holder.tvFoodPrice;
         final ImageView imageAddFood = holder.imgAddFood;
         final EditText edtFoodAmount = holder.tvFoodAmount;
+        CheckBox checkBox = holder.cbAddToCart;
 
         holder.tvName.setText(cart.getFood().getName() + " - " + cart.getFood().getNameRestaurant());
         holder.tvFoodAmount.setText(String.valueOf(cart.getAmount()));
@@ -85,8 +87,9 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
         imageAddFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edtFoodAmount.setText(String.valueOf(Integer.parseInt(edtFoodAmount.getText().toString()) + 1));
-                cart.setAmount(Integer.parseInt(edtFoodAmount.getText().toString()) + 1);
+                int i = Integer.parseInt(edtFoodAmount.getText().toString()) + 1;
+                edtFoodAmount.setText(String.valueOf(i));
+                cart.setAmount(i);
                 notifyDataSetChanged();
             }
         });
@@ -107,11 +110,9 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
                             tvFoodPriceSum.setText(Html.fromHtml
                                     ("<i>"+(String.valueOf
                                             (value * Integer.parseInt(cart.getFood().getPrice())) + " đ")+"</i>"));
-//                            mView.invalidate();
-                        }else{
-//                            mView.invalidate();
                         }
                         iClickItem.updateAmountFood(cart, Integer.parseInt(String.valueOf(edtFoodAmount.getText())), cart.getId());
+
                     } catch (NumberFormatException e) {
 //                        mView.invalidate();
                     }
@@ -136,16 +137,15 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
         holder.tvDeleteFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Bạn có chắc chắn muốn xóa địa chỉ này không ?")
+                builder.setMessage("Bạn có chắc chắn muốn xóa không ?")
                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 listCart.remove(cart);
                                 iClickItem.clickDeleteFoodCart(cart, cart.getId());
                                 notifyDataSetChanged();
-                                Toast.makeText(context, "Xóa địa chỉ thành công!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Xóathành công!", Toast.LENGTH_SHORT).show();
 
                             }
                         })
@@ -156,12 +156,13 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
         });
 
 
-        CheckBox checkBox = holder.cbAddToCart;
+
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(iClickItem != null){
-                    iClickItem.clickAddCheckBoxFoodToCart(cart, isChecked);
+                    iClickItem.clickAddCheckBoxFoodToCart(cart, isChecked, cart.getId());
                     notifyDataSetChanged();
                 }
             }
@@ -189,6 +190,7 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
+        setCart(cart);
 
     }
 
@@ -222,5 +224,11 @@ public class FoodCartAdapter extends RecyclerView.Adapter<FoodCartAdapter.FoodCa
     }
     public void setDataList(List<Cart> newDataList) {
         this.listCart = newDataList;
+    }
+    private void setCart(Cart cart){
+        this.cart = cart;
+    }
+    public int getCountCart(){
+        return cart.getAmount();
     }
 }

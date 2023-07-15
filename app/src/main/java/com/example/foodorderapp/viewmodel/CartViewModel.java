@@ -21,5 +21,8 @@ public class CartViewModel extends ViewModel {
     public void deleteFoodCart(Cart cart, String documentSnapshot){
         cardRepo.deleteFoodCart(cart, documentSnapshot);
     }
+    public void updateFoodCartCheckBox(boolean check, String documentSnapshot){
+        cardRepo.updateFoodCartCheckBox(check, documentSnapshot);
+    }
 
 }

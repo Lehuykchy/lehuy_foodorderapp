@@ -1,5 +1,6 @@
 package com.example.foodorderapp.fragment;
 
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -64,15 +67,28 @@ public class FragmentCartMainPay extends Fragment {
         tvFoodCartPayBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = 0; i<listCart.size(); i++){
-                    Shipper shipper = new Shipper();
-                    int totalMonney = listCart.get(i).getAmount() * Integer.parseInt(listCart.get(i).getFood().getPrice()) + 18000;
-                    BillFood billFood = new BillFood("", listCart.get(i), customer, shipper, "Chờ xác nhận", totalMonney);
-                    billFoodViewModel.addBillFoodRealtime(billFood);
-                    cartViewModel.deleteFoodCart(listCart.get(i), listCart.get(i).getId());
-                }
-                navController.navigate(R.id.action_fragmentCartMainPay_to_fragmentCart);
-                mView.invalidate();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Bạn có chắc chắn thanh toán không?")
+                        .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                for(int i = 0; i<listCart.size(); i++){
+                                    Shipper shipper = new Shipper();
+                                    int totalMonney = listCart.get(i).getAmount() * Integer.parseInt(listCart.get(i).getFood().getPrice()) + 18000;
+                                    BillFood billFood = new BillFood("", listCart.get(i), customer, shipper, "Chờ xác nhận", totalMonney);
+                                    billFoodViewModel.addBillFoodRealtime(billFood);
+                                    cartViewModel.deleteFoodCart(listCart.get(i), listCart.get(i).getId());
+                                }
+                                navController.navigate(R.id.action_fragmentCartMainPay_to_fragmentCart);
+                                mView.invalidate();
+
+                                Toast.makeText(getActivity(), "Thanh toán thành công!", Toast.LENGTH_SHORT).show();
+
+                            }
+                        })
+                        .setNegativeButton("Không", null)
+                        .show();
+
             }
         });
     }
@@ -115,8 +131,6 @@ public class FragmentCartMainPay extends Fragment {
         tvFoodCartPayBuy = mView.findViewById(R.id.tv_foodcartpaybuy);
         cartViewModel = new CartViewModel();
         billFoodViewModel = new BillFoodViewModel();
-
-
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

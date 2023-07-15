@@ -5,6 +5,7 @@ public class Cart {
 
     private Food food;
     private int amount;
+    private boolean checkBox;
 
     public Cart(String id, Food food, int amount) {
         this.id = id;
@@ -34,6 +35,17 @@ public class Cart {
         this.food = food;
         this.amount = amount;
     }
+    public Cart(Food food, int amount, boolean checkBox) {
+        this.food = food;
+        this.amount = amount;
+        this.checkBox = checkBox;
+    }
+    public Cart(String id, Food food, int amount, boolean checkBox) {
+        this.food = food;
+        this.amount = amount;
+        this.checkBox = checkBox;
+        this.id = id;
+    }
 
     public Cart() {
     }
@@ -44,5 +56,13 @@ public class Cart {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isCheckBox() {
+        return checkBox;
+    }
+
+    public void setCheckBox(boolean checkBox) {
+        this.checkBox = checkBox;
     }
 }

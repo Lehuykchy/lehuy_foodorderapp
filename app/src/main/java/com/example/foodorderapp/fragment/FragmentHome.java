@@ -49,7 +49,6 @@ import me.relex.circleindicator.CircleIndicator3;
 
 public class FragmentHome extends Fragment {
     private LinearLayout btHomeRice, btHomeDrinks, btHomeSnacks, btHomeNoodles;
-    private TextView tvHomeHotFood;
     private View mView;
     private NavController navController;
     private ViewPager2 viewPager2PhotoBanner;
@@ -84,7 +83,6 @@ public class FragmentHome extends Fragment {
         onClickBtHomeDrinks();
         onClickBtHomeSnacks();
         onClickBtHomeNoodles();
-        onClickTvHomeHotFood();
         eventSearchyFood();
 
 
@@ -118,14 +116,6 @@ public class FragmentHome extends Fragment {
 
     }
 
-    private void onClickTvHomeHotFood() {
-        tvHomeHotFood.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.action_fragmentHome_to_fragmentHomeHotFood);
-            }
-        });
-    }
 
     private void onClickBtHomeNoodles() {
         btHomeNoodles.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +164,6 @@ public class FragmentHome extends Fragment {
         btHomeDrinks = mView.findViewById(R.id.bthome_drinks);
         btHomeSnacks = mView.findViewById(R.id.bthome_snacks);
         btHomeNoodles = mView.findViewById(R.id.bthome_noodles);
-        tvHomeHotFood = mView.findViewById(R.id.tvhome_hotfood);
         edtHomeSearchFood = mView.findViewById(R.id.edt_homesearchfood);
         imgSearchHome = mView.findViewById(R.id.img_searchhome);
         viewPager2PhotoBanner = mView.findViewById(R.id.viewpager2_photobanner);

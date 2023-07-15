@@ -110,4 +110,23 @@ public class FirebaseCartRepo implements CardRepo{
 
     }
 
+    @Override
+    public void updateFoodCartCheckBox(boolean check, String documentSnapshot) {
+        DocumentReference cardRef = database.collection(CUSTOMER_COLLECTION).document(uid)
+                .collection("carts").document(String.valueOf(documentSnapshot));
+
+        cardRef
+                .update("checkBox", check)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
+
 }

@@ -2,9 +2,7 @@ package com.example.foodorderapp.fragment;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,33 +14,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderapp.R;
 import com.example.foodorderapp.adapter.FoodCartAdapter;
-import com.example.foodorderapp.model.BillFood;
 import com.example.foodorderapp.model.Cart;
 import com.example.foodorderapp.model.Customer;
 import com.example.foodorderapp.model.Food;
 import com.example.foodorderapp.viewmodel.CartMainViewModel;
 import com.example.foodorderapp.viewmodel.CartViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
+
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -51,7 +42,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,8 +55,8 @@ public class FragmentCartMain extends Fragment {
     private RecyclerView recyclerView;
     private View mView;
     private CartViewModel cartViewModel;
-    private int sum =0;
-    private CartMainViewModel cartMainViewModel;
+    private int sum ;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,6 +65,12 @@ public class FragmentCartMain extends Fragment {
         onClickBuyFoodCart();
         return mView;
     }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+    }
+
 
 
     private void onClickBuyFoodCart() {
@@ -109,14 +105,14 @@ public class FragmentCartMain extends Fragment {
                                         .show();
 
 
-                            }else {
+                            } else {
                                 Customer customer = document.toObject(Customer.class);
-                                String name =customer.getName().toString();
+                                String name = customer.getName().toString();
                                 String phone = customer.getNumberphone().toString();
-                                String location =  String.valueOf(customer.getLocation());
+                                String location = String.valueOf(customer.getLocation());
                                 Log.d("checked", name + phone);
-                                Log.d("checked", String.valueOf(customer.getLocation()) );
-                                if(location == "null"){
+                                Log.d("checked", String.valueOf(customer.getLocation()));
+                                if (location == "null") {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                                     builder.setMessage("Bạn chưa cập nhật địa chỉ bạn có muốn di chuyển đến địa chỉ không?")
                                             .setPositiveButton("Có", new DialogInterface.OnClickListener() {
@@ -129,7 +125,7 @@ public class FragmentCartMain extends Fragment {
                                             .setNegativeButton("Không", null)
                                             .show();
 
-                                }else {
+                                } else {
                                     Gson gson = new Gson();
                                     String json = gson.toJson(listCartSell);
                                     Bundle bundle = new Bundle();
@@ -148,12 +144,6 @@ public class FragmentCartMain extends Fragment {
 
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-    }
-
     private void initUI() {
         recyclerView = mView.findViewById(R.id.rcv_cart);
         tvFoodCartSum = mView.findViewById(R.id.tvfoodcart_sum);
@@ -166,6 +156,7 @@ public class FragmentCartMain extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         foodCartAdapter = new FoodCartAdapter(getActivity(), listCart, new FoodCartAdapter.IClickItem() {
+
             @Override
             public void clickDeleteFoodCart(Cart cart, String documentSnapshot) {
                 documentSnapshot = cart.getId();
@@ -176,21 +167,49 @@ public class FragmentCartMain extends Fragment {
 
             // Lỗi  thay đổi chú ý sửa
             @Override
-            public void clickAddCheckBoxFoodToCart(Cart cart, boolean ischecked) {
+            public void clickAddCheckBoxFoodToCart(Cart cart, boolean ischecked, String id) {
+                cartViewModel.updateFoodCartCheckBox(ischecked, id);
+                FirebaseFirestore database = FirebaseFirestore.getInstance();
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                FirebaseUser currentUser = auth.getCurrentUser();
+                String uid = currentUser.getUid();
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                DocumentReference cardRef = database.collection("customers").document(uid);
+                CollectionReference collectionReference = cardRef.collection("carts");
 
-                if(ischecked){
-                    listCartSell.add(cart);
-                    sum += Integer.parseInt(cart.getFood().getPrice()) * cart.getAmount();
-                    tvFoodCartSum.setText(String.valueOf(sum) + " đ");
-                    mView.invalidate();
+                collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
-                }else{
-                    listCartSell.remove(cart);
-                    sum -= Integer.parseInt(cart.getFood().getPrice()) * cart.getAmount();
-                    if(sum < 0) sum = 0;
-                    tvFoodCartSum.setText(String.valueOf(sum) + " đ");
-                    mView.invalidate();
-                }
+                        if (error != null) {
+                            // Xử lý lỗi nếu có
+                            return;
+                        }
+
+                        if (value != null) {
+                            listCartSell.clear();
+                            foodCartAdapter.notifyDataSetChanged();
+                            sum=0;
+                            for (DocumentSnapshot document : value.getDocuments()) {
+                                String documentID = document.getId();
+                                Food food = document.get("food", Food.class);
+                                int amount = document.get("amount", Integer.class);
+                                boolean check = document.get("checkBox", Boolean.class);
+                                if(check){
+                                    Cart cart = new Cart(documentID, food, amount, check);
+                                    listCartSell.add(cart);
+                                    sum+=cart.getAmount()* Integer.parseInt(cart.getFood().getPrice());
+                                }
+                            }
+                            progressDialog.dismiss();
+                            foodCartAdapter.notifyDataSetChanged();
+                            tvFoodCartSum.setText(String.valueOf(sum) +" đ");
+
+                        }
+                    }
+                });
+
+
                 Log.d("documentfood", cart + String.valueOf(ischecked) + (sum));
             }
 
@@ -201,34 +220,11 @@ public class FragmentCartMain extends Fragment {
                 cartViewModel.updateFoodCart(amount, documentSnapshot);
                 Log.d("documentfood", amount + documentSnapshot);
             }
+
+
         });
 
         recyclerView.setAdapter(foodCartAdapter);
-
-//        cartMainViewModel = new ViewModelProvider(this).get(CartMainViewModel.class);
-//        cartMainViewModel.getListMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<Cart>>() {
-//            @Override
-//            public void onChanged(List<Cart> carts) {
-//
-//            }
-//        });
-
-
-
-
-
-
-
-        NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        navController = navHostFragment.getNavController();
-        int currentDestinationId = navController.getCurrentDestination().getId();
-        if (currentDestinationId == R.id.fragmentCartMain) {
-            Log.d("initUI", "dadsdasdasdsadsa");
-            Toast.makeText(getActivity(), "fđfdfdfdfsdfdfsdf", Toast.LENGTH_SHORT).show();
-        }else if(currentDestinationId == R.id.fragmentCart){
-            Log.d("initUI", "huyddaas");
-        }
-
     }
 
     private void getListCart() {
@@ -239,6 +235,7 @@ public class FragmentCartMain extends Fragment {
         String uid = currentUser.getUid();
         DocumentReference cardRef = database.collection("customers").document(uid);
         CollectionReference collectionReference = cardRef.collection("carts");
+
 //        collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 //            @Override
 //            public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -277,31 +274,28 @@ public class FragmentCartMain extends Fragment {
                     return;
                 }
                 if (value != null ) {
-                    listCart.clear();
+                    List<Cart> newlist = new ArrayList<>();
+                    foodCartAdapter.notifyDataSetChanged();
                     for (DocumentSnapshot document : value.getDocuments()) {
                         String documentID = document.getId();
                         Food food = document.get("food", Food.class);
                         int amount = document.get("amount", Integer.class);
-                        Cart cart  = new Cart(food, amount);
+                        boolean check = document.get("checkBox", Boolean.class);
+                        Cart cart  = new Cart(food, amount, check);
                         cart.setId(documentID);
                         Log.d("getFoodCart", food.getName()
                                 + food.getPrice() + food.getNameRestaurant() + documentID +amount);
 
-                        listCart.add(cart);
+                        newlist.add(cart);
+
                     }
+                    listCart.clear();
+                    listCart.addAll(newlist);
                     progressDialog.dismiss();
                     foodCartAdapter.notifyDataSetChanged();
                 }
             }
         });
-
-
-
-
-
-
-
-
 
     }
 }
