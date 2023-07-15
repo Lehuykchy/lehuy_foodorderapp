@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -55,6 +56,13 @@ public class FragmentHomeSearch extends Fragment {
     }
 
     private void setImageSearch() {
+        edtSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
+                imgSearch.performClick(); // Tương tự như việc bấm vào button
+                return true;
+            }
+            return false;
+        });
 
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override

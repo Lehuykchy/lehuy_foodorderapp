@@ -90,19 +90,13 @@ public class FragmentHome extends Fragment {
     }
 
     private void eventSearchyFood() {
-//        edtHomeSearchFood.setSingleLine();
-//        edtHomeSearchFood.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_DONE || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-//                    navController.navigate(R.id.action_fragmentHome_to_fragmentHomeSearch);
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-
-
+        edtHomeSearchFood.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
+                imgSearchHome.performClick(); // Tương tự như việc bấm vào button
+                return true;
+            }
+            return false;
+        });
 
         imgSearchHome.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -27,7 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nhập thông tin tìm kiếm"
-                android:layout_toRightOf="@+id/img_homesearchback"/>
+                android:layout_toRightOf="@+id/img_homesearchback"
+                android:inputType="text"/>
             <ImageView
                 android:id="@+id/img_searchhomefood"
                 android:layout_width="wrap_content"

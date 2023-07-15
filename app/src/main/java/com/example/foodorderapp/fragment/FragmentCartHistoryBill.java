@@ -74,6 +74,11 @@ public class FragmentCartHistoryBill extends Fragment {
         String json = bundle.getString("billhistory");
         Gson gson = new Gson();
         BillFood billFood = gson.fromJson(json, BillFood.class);
+        if(billFood.getStatus().equals("Đơn đã hủy!")){
+            tvCartHitoryBillAvaluate.setEnabled(false);
+            tvCartHitoryBillAvaluate.setBackgroundColor(Color.parseColor("#6F111111"));
+            return;
+        }
 
         if(billFood.getEvaluated() == true){
             tvCartHitoryBillAvaluate.setText("Đã đánh giá");
@@ -128,12 +133,15 @@ public class FragmentCartHistoryBill extends Fragment {
                             float avaluated = food.getEvaluate();
                             int amountfood = food.getAmount();
                             int amountfoodcus = billFood.getCart().getAmount();
-                            float avaluateFood = (float) (((amountfood - amountfoodcus)*avaluated + amountfoodcus *result) / (amountfood));
-                            Log.d("checkvalue", String.valueOf(result) + "/"+ String.valueOf(amountfood) +"/"+ String.valueOf(amountfoodcus) +"/"+String.valueOf(avaluateFood));
+                            float avaluateFood = (float) (((amountfood - amountfoodcus)*avaluated
+                                    + amountfoodcus *result) / (amountfood));
+                            Log.d("checkvalue", String.valueOf(result) + "/"+ String.valueOf(amountfood)
+                                    +"/"+ String.valueOf(amountfoodcus) +"/"+String.valueOf(avaluateFood));
                             billFoodViewModel.updateAvaluateFood(avaluateFood, billFood.getCart().getFood().getId());
                             billFoodViewModel.updateAvaluated(billFood.getCart().getId(), result);
                             tvCartHitoryBillAvaluate.setText("Đã đánh giá");
                             tvCartHitoryBillAvaluate.setEnabled(false);
+                            billFood.setEvaluated(true);
                             dialog.dismiss();
                         }
                     });

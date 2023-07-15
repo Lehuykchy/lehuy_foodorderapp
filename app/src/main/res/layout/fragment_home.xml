@@ -26,11 +26,13 @@
                 android:id="@+id/edt_homesearchfood"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
+                android:imeOptions="actionDone"
                 android:layout_marginLeft="10dp"
                 android:background="@color/maucam"
                 android:backgroundTint="#02111111"
                 android:hint="Tìm kiếm"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:inputType="text"/>
 
         </LinearLayout>
 
@@ -146,7 +148,7 @@
 
         </LinearLayout>
         
-       
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_listfood"
             android:layout_width="match_parent"
