@@ -3,9 +3,11 @@ package com.example.foodorderapp.activity;
 
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity  {
 
 
     }
+
+
 
 
 

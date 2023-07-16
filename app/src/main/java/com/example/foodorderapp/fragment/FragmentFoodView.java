@@ -29,6 +29,7 @@ import androidx.navigation.fragment.FragmentNavigator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodorderapp.R;
 import com.example.foodorderapp.adapter.FoodAdapter;
 import com.example.foodorderapp.model.Cart;
@@ -361,13 +362,19 @@ public class FragmentFoodView extends Fragment {
                     @Override
                     public void onSuccess(Uri uri) {
                         String downloadUrl = uri.toString();
-                        Picasso.get().load(downloadUrl).error(R.drawable.baseline_image_24).into(imgFood);
+                        Log.d("getidphoto", downloadUrl + "-" + idPhotoFood);
+//                        Picasso.get().load(downloadUrl).error(R.drawable.baseline_image_24).into(imgFood);
+                        Glide.with(getActivity())
+                                .load(downloadUrl)
+                                .error(R.drawable.baseline_image_24)
+                                .into(imgFood);
                         progressDialog.dismiss();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        Log.d("getidphoto", "onFailure: "+ e);
                         progressDialog.dismiss();
                     }
                 });
@@ -441,17 +448,5 @@ public class FragmentFoodView extends Fragment {
             navController.navigateUp();
         });
     }
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        // Thực hiện các hành động khi fragment bị xóa view
-        // Ví dụ: Hủy đăng ký các sự kiện hoặc giải phóng tài nguyên liên quan đến giao diện người dùng
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        // Thực hiện các hành động khi fragment bị detach khỏi Activity
-        // Ví dụ: Xóa các tham chiếu đến Activity hoặc các đối tượng liên quan
-    }
 }

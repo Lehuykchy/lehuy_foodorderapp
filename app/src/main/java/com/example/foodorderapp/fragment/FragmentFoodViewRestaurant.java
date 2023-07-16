@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.bumptech.glide.Glide;
 import com.example.foodorderapp.R;
 import com.example.foodorderapp.model.Cart;
 import com.example.foodorderapp.model.Food;
@@ -272,7 +273,10 @@ public class FragmentFoodViewRestaurant extends Fragment {
                     @Override
                     public void onSuccess(Uri uri) {
                         String downloadUrl = uri.toString();
-                        Picasso.get().load(downloadUrl).error(R.drawable.baseline_image_24).into(imgFood);
+                        Glide.with(getActivity())
+                                .load(downloadUrl)
+                                .error(R.drawable.baseline_image_24)
+                                .into(imgFood);
                         progressDialog.dismiss();
                     }
                 })

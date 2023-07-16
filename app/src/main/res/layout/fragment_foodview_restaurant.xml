@@ -52,15 +52,23 @@
                 android:textSize="18dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/imgstar1"/>
+            <TextView
+                android:id="@+id/daban"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đã bán"
+                android:textSize="18dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tv_foodresevaluate"/>
 
             <TextView
                 android:id="@+id/tvfoodres_countselled"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Số lượng"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/tv_foodresevaluate"/>
+                android:layout_toRightOf="@id/daban"/>
 
             <ImageView
                 android:id="@+id/img_foodresheart"

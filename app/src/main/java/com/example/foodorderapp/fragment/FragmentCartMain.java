@@ -83,8 +83,9 @@ public class FragmentCartMain extends Fragment {
         tvBuyFoodCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (listCartSell.size() == 0) {
+                if (listCartSell.size() == 0 ) {
                     Toast.makeText(getActivity(), "Lựa chọn đơn hàng!", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
