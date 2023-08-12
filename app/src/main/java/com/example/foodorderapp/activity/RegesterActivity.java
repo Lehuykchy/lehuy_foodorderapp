@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -42,6 +43,13 @@ public class RegesterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 createAccount();
 
+            }
+        });
+        tvLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegesterActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }
