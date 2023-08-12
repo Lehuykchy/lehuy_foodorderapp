@@ -1,5 +1,5 @@
 # lehuy_foodorderapp
-![anh1](app\src\main\res\asset\anh1.png)
+![anh1](.\app\src\main\res\asset\anh1.png)
 ![anh2](app\src\main\res\asset\anh2.png)
 ![anh3](app\src\main\res\asset\anh3.png)
 ![anh4](app\src\main\res\asset\anh4.png)
